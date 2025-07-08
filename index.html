@@ -46,29 +46,40 @@
     <p>&copy; 2025 会社名</p>
   </footer>
 
-  <!-- BOTCHANスクリプトの読み込みと手動起動設定 -->
+  <!-- BOTCHANスクリプトと起動制御 -->
   <script>
-    const botScript = document.createElement("script");
-    botScript.src = "https://app2.blob.core.windows.net/botchan/js/efoapp.js";
-    botScript.onload = function () {
-      console.log("BOTCHANスクリプト読み込み完了");
-      if (typeof efoInit === "function") {
-        efoInit("686b94425bab4156450213d9", { autoStart: false });
-        console.log("efoInit を呼び出しました（autoStart: false）");
+    const script = document.createElement("script");
+    script.src = "https://app2.blob.core.windows.net/botchan/js/efoapp.js?v=3";
+    script.onload = function () {
+      console.log("✅ BOTCHANスクリプト読み込み完了");
+
+      // 初期化
+      efoInit("686b94425bab4156450213d9", { autoStart: false });
+      console.log("🛠️ efoInitを呼び出しました");
+
+      // 明示的にautoStartを無効に上書き
+      if (window.efo && window.efo.config) {
+        window.efo.config.autoStart = false;
+        console.log("🔧 autoStartをfalseに再設定しました");
+      } else {
+        console.warn("⚠️ window.efoまたはconfigが見つかりません");
       }
-
-      document.getElementById("cta-button").addEventListener("click", function (e) {
-        e.preventDefault();
-        if (window.efo && typeof window.efo.open === "function") {
-          console.log("ボタン押下でBOTCHAN起動");
-          window.efo.open();
-        } else {
-          console.warn("BOTCHANがまだロードされていません");
-        }
-      });
     };
-    document.head.appendChild(botScript);
-  </script>
+    document.head.appendChild(script);
 
-</body>
-</html>
+    // ボタンクリックでBotを開く
+    window.addEventListener("DOMContentLoaded", function () {
+      const btn = document.getElementById("cta-button");
+      if (btn) {
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          if (window.efo && typeof window.efo.open === "function") {
+            console.log("🚀 BOTCHANを手動で起動します");
+            window.efo.open();
+          } else {
+            console.warn("⚠️ BOTCHANがまだ読み込まれていません");
+          }
+        });
+      }
+    });
+  </scrip
