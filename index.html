@@ -46,23 +46,28 @@
     <p>&copy; 2025 会社名</p>
   </footer>
 
-  <!-- BOTCHANスクリプトの読み込みと初期化 -->
+  <!-- BOTCHANスクリプトの読み込みと制御 -->
   <script>
     const botScript = document.createElement("script");
     botScript.src = "https://app2.blob.core.windows.net/botchan/js/efoapp.js";
     botScript.onload = function () {
-      // Botが読み込まれた後に初期化を実行
-      efoInit("686b94425bab4156450213d9", { autoStart: false });
+      // BOT 初期化（autoStart false）
+      if (typeof efoInit === "function") {
+        efoInit("686b94425bab4156450213d9", { autoStart: false });
+      }
 
-      // ボタンクリックでBot起動
-      document.getElementById("cta-button").addEventListener("click", function (e) {
-        e.preventDefault();
-        if (window.efo && typeof window.efo.open === "function") {
-          window.efo.open();
-        } else {
-          console.warn("BOTがまだ読み込まれていません。");
-        }
-      });
+      // ボタンクリックで手動起動
+      const btn = document.getElementById("cta-button");
+      if (btn) {
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          if (window.efo && typeof window.efo.open === "function") {
+            window.efo.open();
+          } else {
+            console.warn("BOTがまだ初期化されていません。");
+          }
+        });
+      }
     };
     document.head.appendChild(botScript);
   </script>
