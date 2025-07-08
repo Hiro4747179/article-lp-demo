@@ -39,7 +39,7 @@
   <!-- CTA -->
   <section id="cta">
     <h2>今すぐ体験してみる</h2>
-    <a href="#" class="cta-button bot_open" id="cta-button" onclick="window.botchan.start()">無料デモを試す</a>
+    <a href="#" class="cta-button" id="cta-button">無料デモを試す</a>
   </section>
 
   <footer>
@@ -51,10 +51,23 @@
   <!-- BOTCHAN 起動設定：手動起動 -->
   <script>
     window.botchanSettings = {
-      key: "686b94425bab4156450213d9", // ←BOTのキー
+      key: "686b94425bab4156450213d9",
       autoStart: false
     };
   </script>
   <script src="https://admin.botchan.chat/js/launcher.js"></script>
+
+  <!-- BOT起動処理（クリックで起動） -->
+  <script>
+    document.getElementById("cta-button").addEventListener("click", function(e) {
+      e.preventDefault();
+      if (window.botchan && typeof window.botchan.start === 'function') {
+        window.botchan.start();
+      } else {
+        console.warn("BOTCHANがまだ読み込まれていません。");
+      }
+    });
+  </script>
+
 </body>
 </html>
