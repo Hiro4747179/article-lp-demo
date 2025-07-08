@@ -8,6 +8,7 @@
   <!-- GTMのheadタグ（必要であればここに） -->
 </head>
 <body>
+  <!-- GTMのbodyタグ（必要であればここに） -->
 
   <!-- ファーストビュー -->
   <header>
@@ -15,10 +16,29 @@
     <p>ユーザー体験を向上させ、コンバージョン率を高める方法をご紹介します。</p>
   </header>
 
-  <!-- その他のセクション -->
-  <section id="problem">...</section>
-  <section id="solution">...</section>
-  <section id="case-study">...</section>
+  <!-- 問題提起 -->
+  <section id="problem">
+    <h2>こんなお悩みありませんか？</h2>
+    <ul>
+      <li>フォーム入力中にユーザーが離脱してしまう</li>
+      <li>入力項目が多く、完了率が低い</li>
+      <li>ユーザーからの問い合わせが減少している</li>
+    </ul>
+  </section>
+
+  <!-- 解決策の提示 -->
+  <section id="solution">
+    <h2>チャット型フォームで解決</h2>
+    <p>従来のフォームをチャット形式に変えることで、ユーザーの入力負担を軽減し、離脱率を低下させます。</p>
+  </section>
+
+  <!-- 導入事例や実績 -->
+  <section id="case-study">
+    <h2>導入事例</h2>
+    <p>ある企業では、チャット型フォームを導入した結果、コンバージョン率が1.5倍に向上しました。</p>
+  </section>
+
+  <!-- CTA -->
   <section id="cta">
     <h2>今すぐ体験してみる</h2>
     <a href="#" class="cta-button" id="cta-button">無料デモを試す</a>
@@ -28,7 +48,29 @@
     <p>&copy; 2025 会社名</p>
   </footer>
 
-  <!-- GTMのbodyタグ（必要であればここに） -->
+  <!-- BOTCHAN起動処理：スクリプト本体はGTM経由で読み込み -->
+  <script>
+    window.addEventListener("load", function () {
+      if (typeof efoInit_nobot === "function") {
+        efoInit_nobot("686b94425bab4156450213d9", {
+          autoStart: false,
+          onReady: function (efoApp) {
+            const ctaButton = document.getElementById("cta-button");
+            if (ctaButton) {
+              ctaButton.addEventListener("click", function (e) {
+                e.preventDefault();
+                efoApp.open();
+              });
+            } else {
+              console.warn("CTAボタンが見つかりません");
+            }
+          }
+        });
+      } else {
+        console.error("efoInit_nobot が定義されていません。GTM経由で読み込まれていない可能性あり。");
+      }
+    });
+  </script>
 
 </body>
 </html>
