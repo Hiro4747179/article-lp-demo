@@ -48,11 +48,26 @@
     <p>&copy; 2025 会社名</p>
   </footer>
 
-  <!-- BOTCHAN起動処理：スクリプト本体はGTM経由で読み込み -->
+  <!-- BOTCHAN起動処理：GTMで読み込まれた efoInit() を使う -->
   <script>
+    function waitForEfoInit(callback, interval = 300, timeout = 10000) {
+      const start = Date.now();
+      const timer = setInterval(() => {
+        if (typeof efoInit === "function") {
+          clearInterval(timer);
+          callback();
+        } else if (Date.now() - start > timeout) {
+          clearInterval(timer);
+          console.error("❌ efoInit が読み込まれませんでした");
+        }
+      }, interval);
+    }
+
     window.addEventListener("load", function () {
-      if (typeof efoInit_nobot === "function") {
-        efoInit_nobot("686b94425bab4156450213d9", {
+      waitForEfoInit(function () {
+        console.log("✅ BOTCHAN init 実行");
+
+        efoInit("686b94425bab4156450213d9", {
           autoStart: false,
           onReady: function (efoApp) {
             const ctaButton = document.getElementById("cta-button");
@@ -62,51 +77,13 @@
                 efoApp.open();
               });
             } else {
-              console.warn("CTAボタンが見つかりません");
+              console.warn("❗CTAボタンが見つかりません");
             }
           }
         });
-      } else {
-        console.error("efoInit_nobot が定義されていません。GTM経由で読み込まれていない可能性あり。");
-      }
-    });
-  </script>
-
-<script>
-  function waitForEfoInit(callback, interval = 300, timeout = 10000) {
-    const start = Date.now();
-    const timer = setInterval(() => {
-      if (typeof efoInit_nobot === "function") {
-        clearInterval(timer);
-        callback();
-      } else if (Date.now() - start > timeout) {
-        clearInterval(timer);
-        console.error("❌ efoInit_nobot が読み込まれませんでした");
-      }
-    }, interval);
-  }
-
-  window.addEventListener("load", function () {
-    waitForEfoInit(function () {
-      console.log("✅ BOTCHAN init 実行");
-
-      efoInit_nobot("686b94425bab4156450213d9", {
-        autoStart: false,
-        onReady: function (efoApp) {
-          const ctaButton = document.getElementById("cta-button");
-          if (ctaButton) {
-            ctaButton.addEventListener("click", function (e) {
-              e.preventDefault();
-              efoApp.open();
-            });
-          } else {
-            console.warn("❗CTAボタンが見つかりません");
-          }
-        }
       });
     });
-  });
-</script>
+  </script>
 
 </body>
 </html>
