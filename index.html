@@ -48,7 +48,7 @@
     <p>&copy; 2025 会社名</p>
   </footer>
 
-  <!-- BOTCHAN起動処理：GTMで読み込まれた efoInit() を使う -->
+  <!-- BOTCHAN起動処理：efoInit（GTM）を使用 -->
   <script>
     function waitForEfoInit(callback, interval = 300, timeout = 10000) {
       const start = Date.now();
@@ -65,7 +65,7 @@
 
     window.addEventListener("load", function () {
       waitForEfoInit(function () {
-        console.log("✅ BOTCHAN init 実行");
+        console.log("✅ BOTCHAN init 実行（efoInit）");
 
         efoInit("686b94425bab4156450213d9", {
           autoStart: false,
