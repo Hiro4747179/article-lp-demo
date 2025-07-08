@@ -1,6 +1,3 @@
-# Query: 
-# ContextLines: 1
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -42,7 +39,7 @@
   <!-- CTA -->
   <section id="cta">
     <h2>今すぐ体験してみる</h2>
-    <a href="#" class="cta-button bot_open" id="cta-button">無料デモを試す</a>
+    <a href="#" class="cta-button bot_open" id="cta-button" onclick="window.botchan.start()">無料デモを試す</a>
   </section>
 
   <footer>
@@ -51,8 +48,13 @@
 
   <script src="main.js"></script>
 
-<script src="https://app2.blob.core.windows.net/botchan/js/efoapp.js" data-disconnect-url="https://hiro4747179.github.io/efo-test/article-efo-demo-v1/" data-disconnect-param="1"></script>
-<script>efoInit('686b94425bab4156450213d9')</script>
-</script>
+  <!-- BOTCHAN 起動設定：手動起動 -->
+  <script>
+    window.botchanSettings = {
+      key: "686b94425bab4156450213d9", // ←BOTのキー
+      autoStart: false
+    };
+  </script>
+  <script src="https://admin.botchan.chat/js/launcher.js"></script>
 </body>
 </html>
