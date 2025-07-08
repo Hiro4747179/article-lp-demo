@@ -39,7 +39,7 @@
   <!-- CTA -->
   <section id="cta">
     <h2>今すぐ体験してみる</h2>
-    <a href="#" class="cta-button" id="cta-button" onclick="window.efo.open()">無料デモを試す</a>
+    <a href="#" class="cta-button" id="cta-button" onclick="efo.open()">無料デモを試す</a>
   </section>
 
   <footer>
@@ -47,7 +47,12 @@
   </footer>
 
   <!-- BOTCHAN 起動設定：手動起動 -->
-  <script src="https://app2.blob.core.windows.net/botchan/js/efoapp.js" data-disconnect-url="https://hiro4747179.github.io/article-lp-demo/" data-disconnect-param="1"></script>
-  <script>efoInit('686b94425bab4156450213d9')</script>
+  <script>
+    window.efoSettings = {
+      key: "686b94425bab4156450213d9", // あなたのBOTCHANキー
+      autoStart: false
+    };
+  </script>
+  <script src="https://app2.blob.core.windows.net/botchan/js/efoapp.js"></script>
 </body>
 </html>
