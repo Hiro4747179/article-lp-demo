@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>記事型LPテンプレート</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- GTMのheadタグ用スニペットをここに入れる -->
 </head>
 <body>
+  <!-- GTMのbodyタグ直下用スニペットをここに入れる -->
 
   <!-- ファーストビュー -->
   <header>
@@ -45,38 +47,5 @@
   <footer>
     <p>&copy; 2025 会社名</p>
   </footer>
-
-  <!-- BOTCHANスクリプト読み込みと初期化 -->
-  <script>
-    const botScript = document.createElement("script");
-    botScript.src = "https://app2.blob.core.windows.net/botchan/js/efoapp_nb.js";
-    botScript.onload = function () {
-      console.log("✅ BOTCHANスクリプト読み込み完了");
-
-      if (typeof efoInit_nobot === "function") {
-        efoInit_nobot("686b94425bab4156450213d9", {
-          autoStart: false,
-          onReady: function (efoApp) {
-            console.log("✅ BOTCHAN onReady → ボタンクリックイベント設定");
-
-            const ctaButton = document.getElementById("cta-button");
-            if (ctaButton) {
-              ctaButton.addEventListener("click", function (e) {
-                e.preventDefault();
-                console.log("✅ BOTCHAN 起動処理");
-                efoApp.open();
-              });
-            } else {
-              console.warn("❗CTAボタンが見つかりません");
-            }
-          }
-        });
-      } else {
-        console.error("❗efoInit_nobot が定義されていません");
-      }
-    };
-    document.head.appendChild(botScript);
-  </script>
-
 </body>
 </html>
