@@ -50,20 +50,21 @@
 
   <!-- BOTCHAN起動処理：efoInit（GTM）を使用 -->
   <script>
-    function waitForEfoInit(callback, interval = 300, timeout = 10000) {
-      const start = Date.now();
-      const timer = setInterval(() => {
-        if (typeof efoInit === "function") {
-          clearInterval(timer);
-          callback();
-        } else if (Date.now() - start > timeout) {
-          clearInterval(timer);
-          console.error("❌ efoInit が読み込まれませんでした");
-        }
-      }, interval);
-    }
+  function waitForEfoInit(callback, interval = 500, timeout = 15000) {
+    const start = Date.now();
+    const timer = setInterval(() => {
+      if (typeof efoInit === "function") {
+        clearInterval(timer);
+        callback();
+      } else if (Date.now() - start > timeout) {
+        clearInterval(timer);
+        console.error("❌ efoInit が読み込まれませんでした");
+      }
+    }, interval);
+  }
 
-    window.addEventListener("load", function () {
+  document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(function () {
       waitForEfoInit(function () {
         console.log("✅ BOTCHAN init 実行（efoInit）");
 
@@ -82,8 +83,9 @@
           }
         });
       });
-    });
-  </script>
+    }, 2000); // ← 初期実行を2秒遅らせます
+  });
+</script>
 
 </body>
 </html>
