@@ -39,20 +39,18 @@
   <!-- CTA -->
   <section id="cta">
     <h2>今すぐ体験してみる</h2>
-    <a href="#" class="cta-button" id="cta-button" onclick="efo.open()">無料デモを試す</a>
+    <a href="#" class="cta-button" onclick="window.efo && window.efo.open()">無料デモを試す</a>
   </section>
 
   <footer>
     <p>&copy; 2025 会社名</p>
   </footer>
 
-  <!-- BOTCHAN 起動設定：手動起動 -->
-  <script>
-    window.efoSettings = {
-      key: "686b94425bab4156450213d9", // あなたのBOTCHANキー
-      autoStart: false
-    };
-  </script>
+  <!-- BOTCHANスクリプト -->
   <script src="https://app2.blob.core.windows.net/botchan/js/efoapp.js"></script>
+  <script>
+    window.efoInit && efoInit("686b94425bab4156450213d9", { autoStart: false });
+  </script>
+
 </body>
 </html>
