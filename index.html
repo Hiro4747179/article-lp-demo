@@ -46,23 +46,14 @@
     <p>&copy; 2025 会社名</p>
   </footer>
 
-  <!-- BOTCHAN nobotモード -->
+  <!-- BOTCHANスクリプト：nobotモード -->
   <script src="https://app2.blob.core.windows.net/botchan/js/efoapp_nb.js"></script>
   <script>
-    // BOTCHAN初期化（nobotモード）
-    efoInit_nobot("686b94425bab4156450213d9");
-
-    // ボタンクリックでBot起動
-    window.addEventListener("load", function () {
-      const btn = document.getElementById("cta-button");
-      if (btn) {
-        btn.addEventListener("click", function (e) {
+    efoInit_nobot('686b94425bab4156450213d9', {
+      onReady: function (efoApp) {
+        document.getElementById("cta-button").addEventListener("click", function (e) {
           e.preventDefault();
-          if (window.efo && typeof window.efo.open === "function") {
-            window.efo.open();
-          } else {
-            console.warn("BOTがまだ読み込まれていません。");
-          }
+          efoApp.open();
         });
       }
     });
