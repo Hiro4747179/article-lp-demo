@@ -46,40 +46,27 @@
     <p>&copy; 2025 会社名</p>
   </footer>
 
-  <!-- BOTCHANスクリプトと起動制御 -->
+  <!-- BOTCHAN nobotモード -->
+  <script src="https://app2.blob.core.windows.net/botchan/js/efoapp_nb.js"></script>
   <script>
-    const script = document.createElement("script");
-    script.src = "https://app2.blob.core.windows.net/botchan/js/efoapp.js?v=3";
-    script.onload = function () {
-      console.log("✅ BOTCHANスクリプト読み込み完了");
+    // BOTCHAN初期化（nobotモード）
+    efoInit_nobot("686b94425bab4156450213d9");
 
-      // 初期化
-      efoInit("686b94425bab4156450213d9", { autoStart: false });
-      console.log("🛠️ efoInitを呼び出しました");
-
-      // 明示的にautoStartを無効に上書き
-      if (window.efo && window.efo.config) {
-        window.efo.config.autoStart = false;
-        console.log("🔧 autoStartをfalseに再設定しました");
-      } else {
-        console.warn("⚠️ window.efoまたはconfigが見つかりません");
-      }
-    };
-    document.head.appendChild(script);
-
-    // ボタンクリックでBotを開く
-    window.addEventListener("DOMContentLoaded", function () {
+    // ボタンクリックでBot起動
+    window.addEventListener("load", function () {
       const btn = document.getElementById("cta-button");
       if (btn) {
         btn.addEventListener("click", function (e) {
           e.preventDefault();
           if (window.efo && typeof window.efo.open === "function") {
-            console.log("🚀 BOTCHANを手動で起動します");
             window.efo.open();
           } else {
-            console.warn("⚠️ BOTCHANがまだ読み込まれていません");
+            console.warn("BOTがまだ読み込まれていません。");
           }
         });
       }
     });
-  </scrip
+  </script>
+
+</body>
+</html>
