@@ -64,44 +64,5 @@
     <p>&copy; 2025 会社名</p>
   </footer>
 
-  <!-- ✅ BOTCHAN起動処理（efoInit） -->
-  <script>
-    function waitForEfoInit(callback, interval = 500, timeout = 15000) {
-      const start = Date.now();
-      const timer = setInterval(() => {
-        if (typeof efoInit === "function") {
-          clearInterval(timer);
-          callback();
-        } else if (Date.now() - start > timeout) {
-          clearInterval(timer);
-          console.error("❌ efoInit が読み込まれませんでした");
-        }
-      }, interval);
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-      setTimeout(function () {
-        waitForEfoInit(function () {
-          console.log("✅ BOTCHAN init 実行（efoInit）");
-
-          efoInit("686b94425bab4156450213d9", {
-            autoStart: false,
-            onReady: function (efoApp) {
-              const ctaButton = document.getElementById("cta-button");
-              if (ctaButton) {
-                ctaButton.addEventListener("click", function (e) {
-                  e.preventDefault();
-                  efoApp.open();
-                });
-              } else {
-                console.warn("❗CTAボタンが見つかりません");
-              }
-            }
-          });
-        });
-      }, 5000); // ← 初期実行を5秒遅らせます
-    });
-  </script>
-
 </body>
 </html>
