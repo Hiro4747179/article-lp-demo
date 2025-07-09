@@ -5,10 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>記事型LPテンプレート</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- GTMのheadタグ（必要であればここに） -->
+
+  <!-- ✅ Google Tag Manager（head） -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;
+    j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+    f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NZ7NN2QD');
+  </script>
+  <!-- End Google Tag Manager -->
 </head>
 <body>
-  <!-- GTMのbodyタグ（必要であればここに） -->
+
+  <!-- ✅ Google Tag Manager（noscript） -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NZ7NN2QD"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager -->
 
   <!-- ファーストビュー -->
   <header>
@@ -48,44 +64,44 @@
     <p>&copy; 2025 会社名</p>
   </footer>
 
-  <!-- BOTCHAN起動処理：efoInit（GTM）を使用 -->
+  <!-- ✅ BOTCHAN起動処理（efoInit） -->
   <script>
-  function waitForEfoInit(callback, interval = 500, timeout = 15000) {
-    const start = Date.now();
-    const timer = setInterval(() => {
-      if (typeof efoInit === "function") {
-        clearInterval(timer);
-        callback();
-      } else if (Date.now() - start > timeout) {
-        clearInterval(timer);
-        console.error("❌ efoInit が読み込まれませんでした");
-      }
-    }, interval);
-  }
+    function waitForEfoInit(callback, interval = 500, timeout = 15000) {
+      const start = Date.now();
+      const timer = setInterval(() => {
+        if (typeof efoInit === "function") {
+          clearInterval(timer);
+          callback();
+        } else if (Date.now() - start > timeout) {
+          clearInterval(timer);
+          console.error("❌ efoInit が読み込まれませんでした");
+        }
+      }, interval);
+    }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    setTimeout(function () {
-      waitForEfoInit(function () {
-        console.log("✅ BOTCHAN init 実行（efoInit）");
+    document.addEventListener("DOMContentLoaded", function () {
+      setTimeout(function () {
+        waitForEfoInit(function () {
+          console.log("✅ BOTCHAN init 実行（efoInit）");
 
-        efoInit("686b94425bab4156450213d9", {
-          autoStart: false,
-          onReady: function (efoApp) {
-            const ctaButton = document.getElementById("cta-button");
-            if (ctaButton) {
-              ctaButton.addEventListener("click", function (e) {
-                e.preventDefault();
-                efoApp.open();
-              });
-            } else {
-              console.warn("❗CTAボタンが見つかりません");
+          efoInit("686b94425bab4156450213d9", {
+            autoStart: false,
+            onReady: function (efoApp) {
+              const ctaButton = document.getElementById("cta-button");
+              if (ctaButton) {
+                ctaButton.addEventListener("click", function (e) {
+                  e.preventDefault();
+                  efoApp.open();
+                });
+              } else {
+                console.warn("❗CTAボタンが見つかりません");
+              }
             }
-          }
+          });
         });
-      });
-    }, 3000); // ← 初期実行を2秒遅らせます
-  });
-</script>
+      }, 5000); // ← 初期実行を5秒遅らせます
+    });
+  </script>
 
 </body>
 </html>
