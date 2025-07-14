@@ -27,7 +27,7 @@ ul {
   margin-bottom: 1.5rem;
 }
 
-a.cta-button {
+a.botchan_open {
   display: inline-block;
   background: #0078d4;
   color: white;
@@ -38,7 +38,7 @@ a.cta-button {
   transition: background 0.3s ease;
 }
 
-a.cta-button:hover {
+a.botchan_open:hover {
   background: #005a9e;
 }
 
